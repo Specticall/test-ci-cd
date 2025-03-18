@@ -1,0 +1,26 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download SSH key
+        uses: actions/download-artifact@v2
+        with:
+          name: id_rsa.pub
+          path: ~/.ssh/id_rsa
+
+      - name: Set SSH key permissions
+        run: chmod 600 ~/.ssh/id_rsa
+
+      - name: SSH into VM and Pull Latest Code
+        run: ssh -o StrictHostKeyChecking=no joseph@20.205.16.81 "cd ~/websites/test && git pull origin main"
