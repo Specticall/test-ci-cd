@@ -15,5 +15,5 @@ steps:
       mkdir -p ~/.ssh
       cp $(sshKey.secureFilePath) ~/.ssh/id_rsa
       chmod 600 ~/.ssh/id_rsa
-      ssh -o StrictHostKeyChecking=no user@your-vm-ip "cd ~/websites/test && git pull origin main"
+      ssh -o StrictHostKeyChecking=no joseph@20.205.16.81 "cd ~/websites/test && git pull origin main"
     displayName: "SSH into VM and Pull Latest Code"
